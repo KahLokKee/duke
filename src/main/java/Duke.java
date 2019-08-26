@@ -18,9 +18,7 @@ public class Duke {
 
     public void getTask(int index) {
         Task task = tasks.get(index - 1);
-        String statusIcon = task.getStatusIcon();
-        String description = task.getDescription();
-        System.out.println("[" + statusIcon + "] " + description);
+        System.out.println(task.toString());
     }
 
     public void listTask() {
@@ -45,21 +43,50 @@ public class Duke {
         System.out.println("added: " + task.getDescription());
     }
 
+    public void addTodo(String description) {
+        Todo todo = new Todo(description);
+        tasks.add(todo);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(todo.toString());
+    }
+
+    public void addDeadline(String description, String by) {
+        Deadline deadline = new Deadline(description, by);
+        tasks.add(deadline);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(deadline.toString());
+    }
+
+    public void addEvent(String description, String at) {
+        Event event = new Event(description, at);
+        tasks.add(event);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(event.toString());
+    }
+
     public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             String command = sc.nextLine();
-            String[] splitCommand = command.split(" ");
+            String[] commandSplit = command.split(" ", 2);
             if (command.equals("bye")) {
                 duke.exit();
                 return;
             } else if (command.equals("list")) {
                 duke.listTask();
-            } else if (splitCommand[0].equals("done")) {
-                int index = Integer.parseInt(splitCommand[1]);
+            } else if (commandSplit[0].equals("done")) {
+                int index = Integer.parseInt(commandSplit[1]);
                 duke.setTaskDone(index);
+            } else if (commandSplit[0].equals("todo")) {
+                duke.addTodo(commandSplit[1]);
+            } else if (commandSplit[0].equals("deadline")) {
+                String[] deadlineSplit = commandSplit[1].split(" /by ");
+                duke.addDeadline(deadlineSplit[0], deadlineSplit[1]);
+            } else if (commandSplit[0].equals("event")) {
+                String[] eventSplit = commandSplit[1].split(" /at ");
+                duke.addEvent(eventSplit[0], eventSplit[1]);
             } else {
                 duke.addTask(command);
             }
