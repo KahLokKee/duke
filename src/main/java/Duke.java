@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,9 +14,45 @@ public class Duke {
 
     public void greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+
+        try (BufferedReader bufferedreader = new BufferedReader(new FileReader("output.txt"))) {
+            String line;
+            while ((line = bufferedreader.readLine()) != null) {
+                char task = line.charAt(1);
+                char isDone = line.charAt(4);
+                if (task == 'T') {
+                    Todo todo = new Todo(line.substring(7));
+                    if (isDone == 'Y') {
+                        todo.setDone(true);
+                    }
+                    tasks.add(todo);
+                } else if (task == 'D') {
+                    String details = line.substring(7);
+                    String[] deadlineSplit = details.split(" \\(by: ");
+                    deadlineSplit[1] = deadlineSplit[1].substring(0, deadlineSplit[1].length() - 1);
+                    Deadline deadline = new Deadline(deadlineSplit[0], deadlineSplit[1]);
+                    if (isDone == 'Y') {
+                        deadline.setDone(true);
+                    }
+                    tasks.add(deadline);
+                } else if (task == 'E') {
+                    String details = line.substring(7);
+                    String[] eventSplit = details.split(" \\(at: ");
+                    eventSplit[1] = eventSplit[1].substring(0, eventSplit[1].length() - 1);
+                    Event event = new Event(eventSplit[0], eventSplit[1]);
+                    if (isDone == 'Y') {
+                        event.setDone(true);
+                    }
+                    tasks.add(event);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void exit() {
+        saveToDisk();
         System.out.println("Bye. Hope to see you again soon!");
     }
 
@@ -74,6 +114,18 @@ public class Duke {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    public void saveToDisk() {
+        try {
+            FileWriter filewriter = new FileWriter("output.txt");
+            for (int i = 0; i < tasks.size(); i++) {
+                filewriter.write(tasks.get(i).toString() + "\n");
+            }
+            filewriter.close();
+        } catch (IOException e) {
+
+        }
+    }
+
     public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
@@ -130,7 +182,7 @@ public class Duke {
                     TaskAlreadyDoneException e) {
                 System.out.println(e);
             } catch (NumberFormatException e) {
-                System.out.println("The index must be an integer.");
+                System.out.println("The index argument must be an integer.");
             }
         }
     }
