@@ -1,5 +1,5 @@
 public class InvalidTaskIndexException extends Exception {
-    String errorMessage;
+    private String errorMessage;
 
     public InvalidTaskIndexException(String errorMessage) {
         super(errorMessage);

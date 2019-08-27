@@ -1,5 +1,5 @@
 public class MissingDeadlineDateException extends Exception {
-    String errorMessage;
+    private String errorMessage;
 
     public MissingDeadlineDateException(String errorMessage) {
         super(errorMessage);

@@ -1,5 +1,5 @@
 public class EmptyListException extends Exception {
-    String errorMessage;
+    private String errorMessage;
 
     public EmptyListException(String errorMessage) {
         super(errorMessage);

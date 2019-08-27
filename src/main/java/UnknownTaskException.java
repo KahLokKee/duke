@@ -1,5 +1,5 @@
 public class UnknownTaskException extends Exception {
-    String errorMessage;
+    private String errorMessage;
 
     public UnknownTaskException(String errorMessage) {
         super(errorMessage);

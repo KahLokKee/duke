@@ -1,5 +1,5 @@
 public class UnknownCommandException extends Exception {
-    String errorMessage;
+    private String errorMessage;
 
     public UnknownCommandException(String errorMessage) {
         super(errorMessage);

@@ -1,7 +1,7 @@
-public class MissingDescriptionException extends Exception {
+public class InvalidTimeException extends Exception {
     private String errorMessage;
 
-    public MissingDescriptionException(String errorMessage) {
+    public InvalidTimeException(String errorMessage) {
         super(errorMessage);
         this.errorMessage = errorMessage;
     }

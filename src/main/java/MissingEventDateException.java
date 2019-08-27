@@ -1,5 +1,5 @@
 public class MissingEventDateException extends Exception {
-    String errorMessage;
+    private String errorMessage;
 
     public MissingEventDateException(String errorMessage) {
         super(errorMessage);

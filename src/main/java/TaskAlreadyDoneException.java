@@ -1,5 +1,5 @@
 public class TaskAlreadyDoneException extends Exception {
-    String errorMessage;
+    private String errorMessage;
 
     public TaskAlreadyDoneException(String errorMessage) {
         super(errorMessage);

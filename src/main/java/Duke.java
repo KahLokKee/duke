@@ -1,8 +1,8 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -46,6 +46,7 @@ public class Duke {
                     tasks.add(event);
                 }
             }
+        } catch (FileNotFoundException ignored) {
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -117,12 +118,10 @@ public class Duke {
     public void saveToDisk() {
         try {
             FileWriter filewriter = new FileWriter("output.txt");
-            for (int i = 0; i < tasks.size(); i++) {
-                filewriter.write(tasks.get(i).toString() + "\n");
-            }
+            for (Task task : tasks) filewriter.write(task.toString() + "\n");
             filewriter.close();
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -156,7 +155,11 @@ public class Duke {
                     if (!command.trim().equals("deadline")) {
                         String[] deadlineSplit = commandSplit[1].split(" /by ");
                         if (deadlineSplit.length == 2) {
-                            duke.addDeadline(deadlineSplit[0], deadlineSplit[1]);
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                            simpleDateFormat.setLenient(false);
+                            Date date = simpleDateFormat.parse(deadlineSplit[1]);
+                            String processedDate = new SimpleDateFormat("dd MMMM yyyy hh:mmaa").format(date);
+                            duke.addDeadline(deadlineSplit[0], processedDate);
                         } else {
                             throw new MissingDeadlineDateException("The due date of a deadline cannot be empty.");
                         }
@@ -167,7 +170,11 @@ public class Duke {
                     if (!command.trim().equals("event")) {
                         String[] eventSplit = commandSplit[1].split(" /at ");
                         if (eventSplit.length == 2) {
-                            duke.addEvent(eventSplit[0], eventSplit[1]);
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                            simpleDateFormat.setLenient(false);
+                            Date date = simpleDateFormat.parse(eventSplit[1]);
+                            String processedDate = new SimpleDateFormat("dd MMMM yyyy hh:mmaa").format(date);
+                            duke.addEvent(eventSplit[0], processedDate);
                         } else {
                             throw new MissingEventDateException("The date of an event cannot be empty.");
                         }
@@ -183,6 +190,8 @@ public class Duke {
                 System.out.println(e);
             } catch (NumberFormatException e) {
                 System.out.println("The index argument must be an integer.");
+            } catch (ParseException e) {
+                System.out.println("The date is invalid");
             }
         }
     }
