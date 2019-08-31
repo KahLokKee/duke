@@ -1,8 +1,9 @@
-public class InvalidTaskIndexException extends Exception {
+package exception;
+
+public class MissingDescriptionException extends DukeException {
     private String errorMessage;
 
-    public InvalidTaskIndexException(String errorMessage) {
-        super(errorMessage);
+    public MissingDescriptionException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

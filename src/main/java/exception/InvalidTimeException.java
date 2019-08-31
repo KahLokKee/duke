@@ -1,8 +1,9 @@
-public class TaskAlreadyDoneException extends Exception {
+package exception;
+
+public class InvalidTimeException extends DukeException {
     private String errorMessage;
 
-    public TaskAlreadyDoneException(String errorMessage) {
-        super(errorMessage);
+    public InvalidTimeException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

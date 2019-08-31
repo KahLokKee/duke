@@ -1,8 +1,9 @@
-public class InvalidTimeException extends Exception {
+package exception;
+
+public class MissingDeadlineDateException extends DukeException {
     private String errorMessage;
 
-    public InvalidTimeException(String errorMessage) {
-        super(errorMessage);
+    public MissingDeadlineDateException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

@@ -1,8 +1,9 @@
-public class UnknownTaskException extends Exception {
+package exception;
+
+public class InvalidTaskIndexException extends DukeException {
     private String errorMessage;
 
-    public UnknownTaskException(String errorMessage) {
-        super(errorMessage);
+    public InvalidTaskIndexException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

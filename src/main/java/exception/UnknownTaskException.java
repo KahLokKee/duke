@@ -1,8 +1,9 @@
-public class UnknownCommandException extends Exception {
+package exception;
+
+public class UnknownTaskException extends DukeException {
     private String errorMessage;
 
-    public UnknownCommandException(String errorMessage) {
-        super(errorMessage);
+    public UnknownTaskException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

@@ -1,8 +1,9 @@
-public class MissingDescriptionException extends Exception {
+package exception;
+
+public class UnknownCommandException extends DukeException {
     private String errorMessage;
 
-    public MissingDescriptionException(String errorMessage) {
-        super(errorMessage);
+    public UnknownCommandException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

@@ -1,8 +1,9 @@
-public class EmptyListException extends Exception {
+package exception;
+
+public class MissingEventDateException extends DukeException {
     private String errorMessage;
 
-    public EmptyListException(String errorMessage) {
-        super(errorMessage);
+    public MissingEventDateException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
