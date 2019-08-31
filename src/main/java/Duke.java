@@ -104,6 +104,27 @@ public class Duke {
         }
     }
 
+    public void findTask(String keyword) {
+        ArrayList<Integer> matchList = new ArrayList<>();
+        int searchIndex = 1;
+        for (Task task : tasks) {
+            if (task.toString().contains(keyword)) {
+                matchList.add(searchIndex);
+            }
+            searchIndex++;
+        }
+        if (matchList.size() > 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            int printIndex = 1;
+            for (int index : matchList) {
+                System.out.print(printIndex++ + ". ");
+                getTask(index);
+            }
+        } else {
+            System.out.println("The search parameter returned no matching results");
+        }
+    }
+
     public void addTodo(String description) {
         Todo todo = new Todo(description);
         tasks.add(todo);
@@ -164,6 +185,12 @@ public class Duke {
                     } else {
                         int index = Integer.parseInt(commandSplit[1]);
                         duke.deleteTask(index);
+                    }
+                } else if (commandSplit[0].equals("find")) {
+                    if (command.trim().equals("find")) {
+                        throw new MissingDescriptionException("The search parameter cannot be empty.");
+                    } else {
+                        duke.findTask(commandSplit[1]);
                     }
                 } else if (commandSplit[0].equals("todo")) {
                     if (!command.trim().equals("todo")) {
