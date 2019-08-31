@@ -91,6 +91,19 @@ public class Duke {
         }
     }
 
+    public void deleteTask(int index) throws UnknownTaskException, InvalidTaskIndexException {
+        if (index <= tasks.size() && index >= 1) {
+            System.out.println("Noted. I've removed this task:");
+            getTask(index);
+            tasks.remove(index - 1);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        } else if (index > tasks.size()) {
+            throw new UnknownTaskException("This task does not exist.");
+        } else {
+            throw new InvalidTaskIndexException("The index is invalid.");
+        }
+    }
+
     public void addTodo(String description) {
         Todo todo = new Todo(description);
         tasks.add(todo);
@@ -145,6 +158,13 @@ public class Duke {
                         int index = Integer.parseInt(commandSplit[1]);
                         duke.setTaskDone(index);
                     }
+                } else if (commandSplit[0].equals("delete")) {
+                    if (commandSplit.length != 2) {
+                        throw new InvalidTaskIndexException("The index is invalid.");
+                    } else {
+                        int index = Integer.parseInt(commandSplit[1]);
+                        duke.deleteTask(index);
+                    }
                 } else if (commandSplit[0].equals("todo")) {
                     if (!command.trim().equals("todo")) {
                         duke.addTodo(command.substring(5));
@@ -189,7 +209,7 @@ public class Duke {
                     TaskAlreadyDoneException e) {
                 System.out.println(e);
             } catch (NumberFormatException e) {
-                System.out.println("The index argument must be an integer.");
+                System.out.println("The index argument must be a single integer.");
             } catch (ParseException e) {
                 System.out.println("The date is invalid");
             }
