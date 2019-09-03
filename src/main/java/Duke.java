@@ -12,9 +12,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("output.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
@@ -42,6 +42,15 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("output.txt").run();
+        new Duke().run();
+    }
+
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
