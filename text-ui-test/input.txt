@@ -1,1 +1,9 @@
+list
+todo buy groceries
+event dinner /at 20/10/2019 1830
+deadline homework /by 30/10/2019 2359
+done 1
+delete 2
+find homework
+list
 bye
