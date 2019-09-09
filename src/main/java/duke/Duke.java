@@ -9,11 +9,17 @@ import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Duke is a command based task manager.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for instantiation of Ui, Storage, TaskList classes.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("output.txt");
@@ -25,6 +31,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts duke
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -43,16 +52,21 @@ public class Duke {
         }
     }
 
+    /**
+     * Invokes the run method
+     * @param args unused
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Takes in a input and echos a response to
+     * @param input the input received from the user
+     * @return a response in a String object
      */
     String getResponse(String input) {
-        return "duke.Duke heard: " + input;
+        return "Duke heard: " + input;
     }
 }

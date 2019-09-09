@@ -10,12 +10,27 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Command to add a deadline task
+ */
 public class DeadlineCommand extends Command {
+    /**
+     * Constructs a command to implement a deadline task
+     * @param fullCommand Input provided by the user
+     */
     public DeadlineCommand(String fullCommand) {
         this.fullCommand = fullCommand;
         this.isExit = false;
     }
 
+    /**
+     * Processes the input and adds a deadline task to the task list
+     * @param tasks List of tasks tracked by duke
+     * @param ui Interface instance that handles user inputs and outputs
+     * @param storage To load and save task data
+     * @throws MissingDescriptionException If description of deadline is missing
+     * @throws MissingDeadlineDateException If no deadline is provided
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MissingDescriptionException, MissingDeadlineDateException {
         String[] commandSplit = fullCommand.split(" ", 2);

@@ -13,13 +13,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Manages the loading and saving of all data
+ */
 public class Storage {
     private String filepath;
 
+    /**
+     * Constructor for storage class
+     * @param filepath String containing path to save file
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Loads the save data from save file
+     * @return ArrayList containing tasks saved in save file
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         try (BufferedReader bufferedreader = new BufferedReader(new FileReader(filepath))) {
@@ -53,13 +64,16 @@ public class Storage {
                     tasks.add(event);
                 }
             }
-        } catch (FileNotFoundException ignored) {
         } catch (IOException e) {
             e.printStackTrace();
         }
         return tasks;
     }
 
+    /**
+     * Save tasks to save file
+     * @param tasks TaskList of current tasks
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter filewriter = new FileWriter("output.txt");

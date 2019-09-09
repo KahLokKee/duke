@@ -11,11 +11,23 @@ import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.UnknownCommandException;
 
+/**
+ * Command Parser to parse user input
+ */
 public class Parser {
 
+    /**
+     * Default constructor
+     */
     public Parser() {
     }
 
+    /**
+     * Processes the input command
+     * @param fullCommand command string input by the user
+     * @return command object corresponding to the input command
+     * @throws UnknownCommandException If command provided does not match any supported commands
+     */
     public static Command parse(String fullCommand) throws UnknownCommandException {
         String[] commandSplit = fullCommand.split(" ", 2);
         if (fullCommand.equals("bye")) {

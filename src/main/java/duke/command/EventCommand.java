@@ -10,12 +10,27 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Command to add an event task
+ */
 public class EventCommand extends Command {
+    /**
+     * Constructs a command to implement an event task
+     * @param fullCommand Input provided by the user
+     */
     public EventCommand(String fullCommand) {
         this.fullCommand = fullCommand;
         this.isExit = false;
     }
 
+    /**
+     * Processes the input and adds an event task to the task list
+     * @param tasks List of tasks tracked by duke
+     * @param ui Interface instance that handles user inputs and outputs
+     * @param storage To load and save task data
+     * @throws MissingDescriptionException If description of deadline is missing
+     * @throws MissingEventDateException If no event date is provided
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MissingEventDateException, MissingDescriptionException {
         String[] commandSplit = fullCommand.split(" ", 2);
