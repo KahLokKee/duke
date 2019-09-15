@@ -4,47 +4,47 @@ import duke.command.*;
 import duke.exception.UnknownCommandException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
-    String fullCommand = "";
     @Test
     void parseBye() throws UnknownCommandException {
-        assertEquals(new ByeCommand(), Parser.parse("bye"));
+        assertTrue(Parser.parse("bye") instanceof ByeCommand);
     }
 
     @Test
     void parseList() throws UnknownCommandException {
-        assertEquals(new ListCommand(), Parser.parse("list"));
+        assertTrue(Parser.parse("list") instanceof ListCommand);
     }
 
     @Test
     void parseDelete() throws UnknownCommandException {
-        assertEquals(new DeleteCommand(fullCommand), Parser.parse("delete"));
+        assertTrue(Parser.parse("delete") instanceof DeleteCommand);
     }
 
     @Test
     void parseFind() throws UnknownCommandException {
-        assertEquals(new FindCommand(fullCommand), Parser.parse("find"));
+        assertTrue(Parser.parse("find") instanceof FindCommand);
     }
 
     @Test
     void parseDone() throws UnknownCommandException {
-        assertEquals(new DoneCommand(fullCommand), Parser.parse("done"));
+        assertTrue(Parser.parse("done") instanceof DoneCommand);
     }
 
     @Test
     void parseDeadline() throws UnknownCommandException {
-        assertEquals(new DeadlineCommand(fullCommand), Parser.parse("deadline"));
+        assertTrue(Parser.parse("deadline") instanceof DeadlineCommand);
     }
 
     @Test
     void parseEvent() throws UnknownCommandException {
-        assertEquals(new EventCommand(fullCommand), Parser.parse("event"));
+        assertTrue(Parser.parse("event") instanceof EventCommand);
+
     }
 
     @Test
     void parseTodo() throws UnknownCommandException {
-        assertEquals(new TodoCommand(fullCommand), Parser.parse("todo"));
+        assertTrue(Parser.parse("todo") instanceof TodoCommand);
     }
 }
